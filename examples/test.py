@@ -115,7 +115,7 @@ def _():
         yield i!=max
     
 print("done, j now", j)
-
+x
 @snark
 def cube(x):
     y = if_then_else((x==10)|(x==11),10,x*x*x)

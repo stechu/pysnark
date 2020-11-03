@@ -57,7 +57,7 @@ To try out PySNARK, do the following:
 
 ```
 cd examples
-python cube.py 3
+PYSNARK_BACKEND=libsnarkgg python3 cube.py 33
 ```
 
 If the libsnark backend is available, it will be imported and used by default.
@@ -76,33 +76,17 @@ By default, if available, the libsnark backend will be used. In this case, the f
 PySNARK with the libsnark backend can automatically produce snarkjs `public.json`, `proof.json` and `verification_key.json` files for the performed verifiable computation:
 
 ```
-meilofs-air:examples meilof$ python3 cube.py 33
+meilofs-air:examples meilof$ PYSNARK_BACKEND=libsnarkgg python3 cube.py 33
 The cube of 33 is 35937
 *** Trying to read pysnark_ek
 *** PySNARK: generating proof pysnark_log (sat=True, #io=2, #witness=2, #constraint=3)
 *** Public inputs: 33 35937
 *** Verification status: True
-meilofs-air:examples meilof$ python3 -m pysnark.libsnark.tosnarkjs
+meilofs-air:examples meilof$ python3 -m pysnark.libsnark.tosnarkjsgg
 meilofs-air:examples meilof$ snarkjs verify
-OK
+[INFO]  snarkJS: OK!
 $ snarkjs generateverifier
 $ snarkjs generatecall
-```
-
-## Using PySNARK (snarkjs backend)
-
-```
-$ cd examples
-$ PYSNARK_BACKEND=snarkjs python3 cube.py 33
-The cube of 33 is 35937
-witness.json and circuit.json written; use 'snarkjs setup', 'snarkjs proof', and 'snarkjs verify'
-$ snarkjs setup
-$ snarkjs proof
-$ snarkjs verify
-OK
-$ snarkjs generateverifier
-$ snarkjs generatecall
-...
 ```
 
 ## Using PySNARK (zkinterface backend)

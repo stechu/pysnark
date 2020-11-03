@@ -166,7 +166,7 @@ def add_constraint(v,w,y,check=True):
 class LinComb:
     def __init__(self, value, lc):
         self.value = value
-        self.lc = lc   
+        self.lc = lc
         
     def val(self):
         """ Creates a SNARK output for the current output and return its value """
@@ -182,7 +182,7 @@ class LinComb:
     # self<other, so other-self>0, so other-self-1>=0
     def __lt__(self, other): return (other-self-1).check_positive()
     def assert_lt(self, other, err=None): (other-self-1).assert_positive(err)
-        
+
     # self<=other, so other-self>=0
     def __le__(self, other): return (other-self).check_positive()
     def assert_le(self, other, err=None): (other-self).assert_positive(err)
@@ -502,8 +502,9 @@ Can be used as a decorator, e.g.,
 def snark(fn):
     def snark__(*args, **kwargs):
         if kwargs: raise ValueError("@snark-decorated functions cannot have keyword arguments")
-
+        print(args)
         argscopy = for_each_in(int, lambda x: PubVal(x), args)
+        print(type(argscopy[0]))
         ret = fn(*argscopy, **kwargs)
         retcopy = for_each_in(LinComb, lambda x: x.val(), ret)
 
